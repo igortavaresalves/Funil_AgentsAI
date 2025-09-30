@@ -1,0 +1,5 @@
+- [x] Projeto React/TypeScript para funil de vendas de festas iniciado na pasta Frontend.
+- [ ] Scaffold do projeto será criado com layout moderno, chat interativo, espaço para imagens, informações do lead e status do funil.
+- [ ] Integração futura com backend Python via API REST.
+- [ ] README.md será gerado com instruções de uso.
+- [ ] Testes e ajustes visuais após estrutura inicial.
