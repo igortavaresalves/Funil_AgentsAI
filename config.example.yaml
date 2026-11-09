@@ -1,0 +1,5 @@
+# Copie este arquivo para config.yaml e preencha com suas chaves.
+# O config.yaml esta no .gitignore e nunca deve ser commitado.
+GOOGLE_API_KEY: "sua-chave-do-google-ai-studio"
+OPENAI_API_KEY: "sua-chave-da-openai"      # opcional
+PINECONE_API_KEY: "sua-chave-do-pinecone"  # opcional
