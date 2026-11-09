@@ -1,0 +1,18 @@
+# Segredos e configuracao local
+config.yaml
+.env
+
+# Ambientes e dependencias
+.venv/
+venv/
+node_modules/
+frontend/node_modules/
+
+# Build e cache
+__pycache__/
+*.pyc
+dist/
+frontend/dist/
+
+# Pasta auxiliar local
+Funil-IA/
