@@ -16,3 +16,17 @@ frontend/dist/
 
 # Pasta auxiliar local
 Funil-IA/
+
+# Dados de leads (contem dados pessoais de clientes)
+leads.xlsx
+*.xlsx
+data/
+
+# Banco local do checkpointer
+*.sqlite
+*.sqlite-*
+*.db
+
+# Ferramentas
+.pytest_cache/
+.ruff_cache/
