@@ -51,9 +51,29 @@ Pré-requisitos: Python 3.11+ e Node 20+.
 python -m venv .venv
 .venv\Scripts\Activate.ps1
 pip install -r requirements.txt
-copy .env.example .env   # e preencha a GOOGLE_API_KEY
+copy .env.example .env   # escolha o modelo (abaixo)
 uvicorn api.main:app --reload
 ```
+
+### Escolhendo o modelo
+
+| `LLM_PROVIDER` | Onde roda | Custo | Precisa de |
+| --- | --- | --- | --- |
+| `local` | No seu PC, pelo [LM Studio](https://lmstudio.ai) | Grátis, nada sai da máquina | LM Studio com um modelo carregado |
+| `gemini` | API do Google | Cota grátis, depois pago | `GOOGLE_API_KEY` do [AI Studio](https://aistudio.google.com/apikey) |
+
+Com `local`, se a `GOOGLE_API_KEY` estiver preenchida, o Gemini entra como reserva quando o modelo local falhar.
+Com `gemini`, o reserva é o `GEMINI_FALLBACK_MODEL` (útil quando a API devolve 503 por alta demanda).
+
+**Modelo local com o LM Studio:**
+
+1. Instale o LM Studio e, na aba de busca, baixe o **Qwen3 4B** (`qwen/qwen3-4b`). Ele cabe numa placa de 4 GB
+   e usa ferramentas e saída estruturada, que o funil precisa. Com mais memória de vídeo, um 8B responde melhor.
+2. Na aba **Developer**, carregue o modelo e clique em **Start Server** (porta 1234).
+3. No `.env`: `LLM_PROVIDER=local` e `LOCAL_MODEL` com o nome exato do modelo, como aparece no LM Studio.
+
+O LM Studio expõe uma API no mesmo formato da OpenAI, por isso o projeto usa a biblioteca `langchain-openai`.
+Não há conta, chave nem cobrança da OpenAI: o servidor é o seu próprio PC.
 
 **Frontend:**
 
