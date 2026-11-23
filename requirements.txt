@@ -2,6 +2,7 @@
 langgraph>=1.2,<2
 langchain-core>=1.8,<2
 langchain-google-genai>=4.5,<5
+langchain-openai>=1.8,<2  # cliente do LM Studio (servidor local; não usa a OpenAI)
 
 # API
 fastapi>=0.162,<1

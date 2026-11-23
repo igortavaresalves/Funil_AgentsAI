@@ -9,9 +9,20 @@ PERSONA = (
 SUPERVISOR_PROMPT = """Você é o SUPERVISOR de um funil de vendas de decoração de festas.
 Leia a conversa e escolha quem responde a ÚLTIMA mensagem da cliente:
 
-- especialista: dúvidas sobre serviços, pacotes, preços, estilos, inspirações, ou conversa geral.
-- qualificador: a cliente está passando ou deveria passar dados do evento
-  (nome, tipo de festa, número de convidados, orçamento, data) ou quer um orçamento/proposta.
+- especialista: a cliente fez uma PERGUNTA (serviços, pacotes, quanto custa, estilos, ideias)
+  ou está só conversando.
+- qualificador: a cliente está INFORMANDO dados do evento (nome, data, convidados, orçamento)
+  sem fazer pergunta, ou pediu explicitamente uma proposta.
+
+Regra de prioridade: se a mensagem tem uma pergunta, escolha especialista,
+mesmo que ela também cite o tipo de festa. Mencionar "casamento" não é informar dados.
+
+Exemplos:
+- "Vocês fazem casamento? Quanto custa?" -> especialista
+- "Que tipo de decoração vocês fazem?" -> especialista
+- "Meu nome é Ana e caso dia 10 de maio." -> qualificador
+- "Serão 150 convidados e tenho 30 mil." -> qualificador
+- "Quero uma proposta para meu aniversário." -> qualificador
 
 Dados do lead já coletados: {lead}
 Campos que ainda faltam: {faltam}
@@ -29,7 +40,10 @@ Ao final, convide a cliente a contar mais sobre o evento (tipo de festa, data, c
 EXTRACAO_PROMPT = """Extraia da conversa os dados do evento da cliente.
 Hoje é {hoje}. Converta datas relativas ("dia 20 de março", "daqui a 3 meses") para AAAA-MM-DD.
 Orçamento é o valor total em reais (ex.: "15 mil" = 15000).
-Deixe em branco (null) o que a cliente não informou. Não invente.
+tipo_festa: deduza da conversa INTEIRA, inclusive das perguntas da cliente.
+Ex.: "vou casar" ou perguntar sobre casamento = "casamento"; "minha filha faz 15" = "15 anos";
+"evento da empresa" = "corporativo". Estilo (rústico, boho) não é tipo de festa.
+Deixe em branco (null) o que a cliente não informou nem deu a entender. Não invente.
 
 Dados já registrados (mantenha se a cliente não corrigiu): {lead}
 """
