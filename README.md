@@ -67,13 +67,16 @@ Com `gemini`, o reserva é o `GEMINI_FALLBACK_MODEL` (útil quando a API devolve
 
 **Modelo local com o LM Studio:**
 
-1. Instale o LM Studio e, na aba de busca, baixe o **Qwen3 4B** (`qwen/qwen3-4b`). Ele cabe numa placa de 4 GB
+1. Instale o LM Studio e, na aba de busca, baixe o **Qwen3 4B Instruct 2507**. Ele cabe numa placa de 4 GB
    e usa ferramentas e saída estruturada, que o funil precisa. Com mais memória de vídeo, um 8B responde melhor.
 2. Na aba **Developer**, carregue o modelo e clique em **Start Server** (porta 1234).
-3. No `.env`: `LLM_PROVIDER=local` e `LOCAL_MODEL` com o nome exato do modelo, como aparece no LM Studio.
+3. No `.env`: `LLM_PROVIDER=local` e `LOCAL_MODEL` com o nome exato do modelo
+   (`curl http://localhost:1234/v1/models` mostra; o padrão é `qwen3-4b-instruct-2507`).
 
 O LM Studio expõe uma API no mesmo formato da OpenAI, por isso o projeto usa a biblioteca `langchain-openai`.
 Não há conta, chave nem cobrança da OpenAI: o servidor é o seu próprio PC.
+
+Detalhes, resultados dos testes com o modelo local e solução de problemas: [docs/modelo-llm.md](docs/modelo-llm.md).
 
 **Frontend:**
 

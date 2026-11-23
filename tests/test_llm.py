@@ -35,9 +35,9 @@ def _get_llm_com(monkeypatch, **config):
 
 
 def test_provedor_local_aponta_para_o_lm_studio(monkeypatch):
-    llm = _get_llm_com(monkeypatch, llm_provider="local", local_model="qwen/qwen3-4b", google_api_key="")
+    llm = _get_llm_com(monkeypatch, llm_provider="local", local_model="qwen3-4b-instruct-2507", google_api_key="")
     assert type(llm.principal).__name__ == "ChatOpenAI"
-    assert llm.principal.model_name == "qwen/qwen3-4b"
+    assert llm.principal.model_name == "qwen3-4b-instruct-2507"
     assert str(llm.principal.openai_api_base).startswith("http://localhost:1234")
     assert llm.reserva is None  # sem chave do Google, sem reserva
 
